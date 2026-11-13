@@ -1,549 +1,427 @@
 
 
 <!DOCTYPE html>
-
 <html lang="fa" dir="rtl">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080d18">
-
-<title>TT CRYPTO | Smart Market Intelligence</title>
-
+<title>TT CRYPTO | Analysis Engine</title>
 <style>
-
 *{box-sizing:border-box}
-
-body{
-
- margin:0;
-
- background:#080d18;
-
- color:#edf2fa;
-
- font-family:Arial,Tahoma,sans-serif;
-
-}
-
-header{
-
- padding:22px 18px;
-
- background:#101a2b;
-
- border-bottom:1px solid #26334a;
-
- display:flex;
-
- justify-content:space-between;
-
- align-items:center;
-
-}
-
+body{margin:0;background:#080d18;color:#edf2fa;font-family:Arial,Tahoma,sans-serif}
+header{padding:20px;background:#101a2b;border-bottom:1px solid #26334a;display:flex;justify-content:space-between;align-items:center}
 .logo{font-size:23px;font-weight:bold;color:#54d6a0}
-
-.logo span{color:#fff}
-
 .status{font-size:11px;color:#54d6a0}
-
-.container{padding:18px;max-width:1100px;margin:auto}
-
-h2{font-size:18px;margin:24px 0 14px}
-
-.subtitle{color:#8998ae;font-size:12px;margin-top:7px}
-
-.hero{
-
- background:linear-gradient(130deg,#142d3c,#15213b);
-
- border:1px solid #29465a;
-
- border-radius:15px;
-
- padding:23px;
-
-}
-
-.hero h1{font-size:25px;margin:0;color:#fff}
-
-.hero p{color:#aab9ca;line-height:2;font-size:13px}
-
-.stats{
-
- display:grid;
-
- grid-template-columns:repeat(2,1fr);
-
- gap:10px;
-
- margin-top:18px;
-
-}
-
-.stat,.panel{
-
- background:#111a2a;
-
- border:1px solid #25334a;
-
- border-radius:12px;
-
- padding:15px;
-
-}
-
-.stat small{color:#8e9bb0}
-
-.stat strong{display:block;font-size:19px;margin-top:10px}
-
-.green{color:#42d69a}
-
-.red{color:#ff6478}
-
+.container{max-width:1200px;margin:auto;padding:18px}
+h2{font-size:18px;margin:25px 0 14px}
+.hero,.panel,.stat,.signal{background:#111a2a;border:1px solid #25334a;border-radius:12px;padding:16px}
+.hero{background:linear-gradient(130deg,#142d3c,#15213b)}
+.hero h1{font-size:24px}
+p,.muted{color:#96a6bb;font-size:12px;line-height:2}
+button,select{padding:10px 15px;border:0;border-radius:8px;background:#1b9b72;color:white;cursor:pointer}
+button:disabled{opacity:.5}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:15px}
+.stat small{color:#8998ae}
+.stat strong{display:block;font-size:19px;margin-top:9px}
+.green{color:#42d69a}.red{color:#ff6478}
 .table-wrap{overflow-x:auto}
-
-table{width:100%;border-collapse:collapse;min-width:520px}
-
-th,td{
-
- padding:14px 10px;
-
- text-align:right;
-
- border-bottom:1px solid #253047;
-
- font-size:13px;
-
-}
-
-th{color:#8c9bb2;font-weight:normal}
-
-.coin{font-weight:bold}
-
-.symbol{color:#8495ad;font-size:11px}
-
-.price{font-weight:bold;direction:ltr;text-align:right}
-
-.signal-grid{
-
- display:grid;
-
- grid-template-columns:1fr;
-
- gap:12px;
-
-}
-
-.signal{
-
- background:#111a2a;
-
- border:1px solid #26334a;
-
- border-radius:12px;
-
- padding:16px;
-
-}
-
-.signal h3{margin:0 0 12px;font-size:15px}
-
-.signal p{font-size:12px;color:#9aa9be;line-height:1.9}
-
-.tag{
-
- display:inline-block;
-
- padding:5px 10px;
-
- border-radius:20px;
-
- font-size:11px;
-
- margin-bottom:10px;
-
-}
-
-.watch{background:#29364d;color:#c2d5ed}
-
+table{width:100%;border-collapse:collapse;min-width:850px}
+td,th{padding:12px 8px;border-bottom:1px solid #26334a;text-align:right;font-size:12px}
+th{color:#8e9bb0}
+.price{direction:ltr}
+.signal-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.signal{line-height:2}
+.signal h3{font-size:15px}
+.tag{display:inline-block;padding:4px 9px;border-radius:20px;font-size:11px}
 .long{background:#123e32;color:#55e4ad}
-
 .short{background:#45232e;color:#ff8293}
-
-.note{
-
- color:#94a4ba;
-
- font-size:11px;
-
- line-height:2;
-
- background:#111a2a;
-
- border-radius:10px;
-
- padding:14px;
-
- margin-top:18px;
-
-}
-
-footer{
-
- text-align:center;
-
- color:#718098;
-
- padding:28px 10px;
-
- font-size:11px;
-
-}
-
-.refresh{
-
- background:#1b9b72;
-
- color:white;
-
- border:0;
-
- padding:10px 15px;
-
- border-radius:8px;
-
- cursor:pointer;
-
- font-weight:bold;
-
-}
-
-.refresh:active{opacity:.7}
-
+.watch{background:#29364d;color:#c2d5ed}
+.note{background:#111a2a;padding:14px;border-radius:10px;color:#9aa9be;font-size:11px;line-height:2;margin-top:20px}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
+footer{text-align:center;padding:25px;color:#718098;font-size:11px}
 @media(min-width:700px){
-
- .stats{grid-template-columns:repeat(4,1fr)}
-
- .signal-grid{grid-template-columns:repeat(3,1fr)}
-
- .container{padding:28px}
-
+.stats{grid-template-columns:repeat(4,1fr)}
+.signal-grid{grid-template-columns:repeat(2,1fr)}
 }
-
 </style>
-
 </head>
-
 <body>
 
 <header>
-
- <div class="logo">TT <span>CRYPTO</span></div>
-
- <div class="status" id="connection">● در حال اتصال...</div>
-
+<div class="logo">TT <span style="color:white">CRYPTO</span></div>
+<div class="status" id="connection">● آماده‌سازی موتور</div>
 </header>
 
 <main class="container">
 
 <section class="hero">
-
- <h1>هوش مصنوعی بازار کریپتو</h1>
-
- <p>
-
- پایگاه تحلیل بازار، شناسایی فرصت‌های معاملاتی،
-
- بررسی جریان نقدینگی و ساختار بازار.
-
- </p>
-
- <button class="refresh" onclick="loadMarket()">به‌روزرسانی بازار ↻</button>
-
+<h1>Smart Market Intelligence</h1>
+<p>
+موتور محاسبات تکنیکال، بررسی چندتایم‌فریمی،
+کشف فرصت‌های LONG و SHORT و مدیریت ریسک.
+</p>
+<div class="controls">
+<button id="scanBtn" onclick="scanMarket()">شروع اسکن بازار ↻</button>
+<select id="tf">
+<option value="15m">تایم‌فریم ورود: 15m</option>
+<option value="1h" selected>تایم‌فریم ورود: 1h</option>
+</select>
+</div>
 </section>
 
 <h2>نمای کلی بازار</h2>
-
 <section class="stats">
-
- <div class="stat">
-
-  <small>BTC / USDT</small>
-
-  <strong id="btc">--</strong>
-
- </div>
-
- <div class="stat">
-
-  <small>ETH / USDT</small>
-
-  <strong id="eth">--</strong>
-
- </div>
-
- <div class="stat">
-
-  <small>SOL / USDT</small>
-
-  <strong id="sol">--</strong>
-
- </div>
-
- <div class="stat">
-
-  <small>وضعیت داده‌ها</small>
-
-  <strong id="market-status" style="font-size:15px">در انتظار</strong>
-
- </div>
-
+<div class="stat"><small>BTC / USDT</small><strong id="btc">--</strong></div>
+<div class="stat"><small>ETH / USDT</small><strong id="eth">--</strong></div>
+<div class="stat"><small>تعداد بررسی‌شده</small><strong id="scanned">0</strong></div>
+<div class="stat"><small>آخرین وضعیت</small><strong id="marketStatus">در انتظار</strong></div>
 </section>
 
-<h2>قیمت و عملکرد ارزها</h2>
-
+<h2>اسکن فرصت‌های بازار</h2>
 <div class="panel table-wrap">
-
 <table>
-
 <thead>
-
 <tr>
-
-<th>ارز</th>
-
-<th>قیمت (USDT)</th>
-
-<th>تغییر ۲۴h</th>
-
-<th>حجم ۲۴h</th>
-
+<th>ارز</th><th>قیمت</th><th>روند</th>
+<th>RSI</th><th>حجم نسبی</th>
+<th>LONG Score</th><th>SHORT Score</th><th>وضعیت</th>
 </tr>
-
 </thead>
-
 <tbody id="market">
-
-<tr><td colspan="4">در حال دریافت اطلاعات بازار...</td></tr>
-
+<tr><td colspan="8">برای شروع اسکن کلیک کنید.</td></tr>
 </tbody>
-
 </table>
-
 </div>
 
-<h2>شکار فرصت‌های معاملاتی</h2>
-
-<div class="signal-grid">
-
-<div class="signal">
-
- <span class="tag watch">در انتظار تحلیل</span>
-
- <h3>LONG Scanner</h3>
-
- <p>شناسایی حمایت‌ها، جمع‌آوری نقدینگی، تغییر ساختار و فرصت‌های ورود خرید.</p>
-
+<h2>فرصت‌های معاملاتی LONG</h2>
+<div class="signal-grid" id="longSignals">
+<div class="signal">در انتظار محاسبات</div>
 </div>
 
-<div class="signal">
-
- <span class="tag watch">در انتظار تحلیل</span>
-
- <h3>SHORT Scanner</h3>
-
- <p>شناسایی مقاومت‌ها، ضعف خریداران، شکست حمایت و فرصت‌های ورود فروش.</p>
-
+<h2>فرصت‌های معاملاتی SHORT</h2>
+<div class="signal-grid" id="shortSignals">
+<div class="signal">در انتظار محاسبات</div>
 </div>
 
-<div class="signal">
-
- <span class="tag watch">در انتظار تحلیل</span>
-
- <h3>Smart Money</h3>
-
- <p>بررسی نقدینگی، حجم، ساختار بازار، شکست‌ها و رفتار بازیگران بزرگ.</p>
-
-</div>
-
+<h2>محاسبات و تنظیمات موتور</h2>
+<div class="panel">
+<p id="engineInfo">
+EMA20/50 | RSI14 | ATR14 | Volume Ratio |
+Breakout | Multi-Timeframe
+</p>
+<p>حداقل امتیاز اولیه: 60 از 100</p>
+<p>حد ضرر: 1.5 × ATR</p>
+<p>هدف اول: 1.5R | هدف دوم: 2.5R</p>
+<p>قیمت مرجع: Binance Spot</p>
 </div>
 
 <div class="note">
-
- <strong>منبع اطلاعات قیمت:</strong> Binance Spot API<br>
-
- زمان آخرین به‌روزرسانی: <span id="updated">--</span><br>
-
- اطلاعات این نسخه صرفاً داده‌های بازار است. بخش اسکن سیگنال هنوز به موتور تحلیل متصل نشده است.
-
+منبع: Binance Spot API<br>
+زمان اسکن: <span id="updated">--</span><br>
+سیگنال‌ها خروجی الگوریتم تکنیکال هستند و هنوز جریان سفارشات،
+CVD، Open Interest و Funding در آن‌ها لحاظ نشده است.
 </div>
 
 </main>
 
-<footer>
-
-TT CRYPTO © 2026 | SMART MARKET INTELLIGENCE
-
-</footer>
+<footer>TT CRYPTO © 2026 | SMART MARKET INTELLIGENCE</footer>
 
 <script>
-
-const symbols = [
-
+const SYMBOLS=[
 "BTCUSDT","ETHUSDT","BNBUSDT","SOLUSDT",
-
 "XRPUSDT","DOGEUSDT","LINKUSDT","SUIUSDT",
-
 "AVAXUSDT","ADAUSDT","ZECUSDT","NEARUSDT"
-
 ];
 
-const names = {
+const $=id=>document.getElementById(id);
 
-BTC:"Bitcoin",ETH:"Ethereum",BNB:"BNB",
+function avg(a){
+return a.reduce((x,y)=>x+y,0)/a.length;
+}
 
-SOL:"Solana",XRP:"XRP",DOGE:"Dogecoin",
+function ema(values,period){
+if(values.length<period)return null;
+let result=avg(values.slice(0,period));
+const k=2/(period+1);
+for(let i=period;i<values.length;i++){
+result=values[i]*k+result*(1-k);
+}
+return result;
+}
 
-LINK:"Chainlink",SUI:"Sui",AVAX:"Avalanche",
+function rsi(values,period=14){
+if(values.length<=period)return null;
+let gains=0,losses=0;
+for(let i=values.length-period;i<values.length;i++){
+const d=values[i]-values[i-1];
+if(d>0)gains+=d;
+else losses-=d;
+}
+if(losses===0)return 100;
+return 100-(100/(1+gains/losses));
+}
 
-ADA:"Cardano",ZEC:"Zcash",NEAR:"NEAR"
+function atr(candles,period=14){
+if(candles.length<=period)return null;
+const tr=[];
+for(let i=1;i<candles.length;i++){
+const c=candles[i],p=candles[i-1];
+tr.push(Math.max(
+c.high-c.low,
+Math.abs(c.high-p.close),
+Math.abs(c.low-p.close)
+));
+}
+return avg(tr.slice(-period));
+}
 
+function analyze(candles){
+if(candles.length<60)throw Error("Insufficient candles");
+
+const closes=candles.map(c=>c.close);
+const volumes=candles.map(c=>c.volume);
+
+const price=closes.at(-1);
+const e20=ema(closes,20);
+const e50=ema(closes,50);
+const r=rsi(closes);
+const a=atr(candles);
+
+const volumeRatio=
+volumes.at(-1)/avg(volumes.slice(-21,-1));
+
+const recentHigh=Math.max(...candles.slice(-21,-1).map(c=>c.high));
+const recentLow=Math.min(...candles.slice(-21,-1).map(c=>c.low));
+
+const previousHigh=candles.at(-2).high;
+const previousLow=candles.at(-2).low;
+
+const breakoutUp=price>recentHigh;
+const breakoutDown=price<recentLow;
+
+const longConditions=[
+price>e20,
+e20>e50,
+r>50&&r<75,
+volumeRatio>1.2,
+breakoutUp,
+price>previousHigh
+];
+
+const shortConditions=[
+price<e20,
+e20<e50,
+r<50&&r>25,
+volumeRatio>1.2,
+breakoutDown,
+price<previousLow
+];
+
+const longScore=longConditions.filter(Boolean).length;
+const shortScore=shortConditions.filter(Boolean).length;
+
+return{
+price,e20,e50,r,a,volumeRatio,
+breakoutUp,breakoutDown,
+longScore:Math.round(longScore/6*100),
+shortScore:Math.round(shortScore/6*100),
+trend:price>e20&&e20>e50?"صعودی":
+price<e20&&e20<e50?"نزولی":"خنثی"
 };
-
-function formatPrice(n){
-
- return Number(n).toLocaleString("en-US",{
-
- maximumFractionDigits:8
-
- });
-
 }
 
-function formatVolume(n){
+async function getCandles(symbol,interval){
+const url=
+"https://api.binance.com/api/v3/klines?symbol="+symbol+
+"&interval="+interval+"&limit=100";
 
- return Number(n).toLocaleString("en-US",{
+const res=await fetch(url);
+if(!res.ok)throw Error("Binance API "+res.status);
 
- notation:"compact",maximumFractionDigits:2
-
- });
-
+const data=await res.json();
+return data.map(c=>({
+time:c[0],
+open:+c[1],
+high:+c[2],
+low:+c[3],
+close:+c[4],
+volume:+c[5],
+closed:c[6]<Date.now()
+}));
 }
 
-async function loadMarket(){
-
- const status=document.getElementById("connection");
-
- status.textContent="● دریافت اطلاعات...";
-
- try{
-
-  const url="https://api.binance.com/api/v3/ticker/24hr?symbols="+
-
-  encodeURIComponent(JSON.stringify(symbols));
-
-  const response=await fetch(url);
-
-  if(!response.ok) throw new Error("API error");
-
-  const data=await response.json();
-
-  if(!Array.isArray(data)) throw new Error("Invalid data");
-
-  const map={};
-
-  data.forEach(item=>map[item.symbol]=item);
-
-  document.getElementById("market").innerHTML=
-
-  symbols.map(symbol=>{
-
-   const c=map[symbol];
-
-   if(!c)return "";
-
-   const base=symbol.replace("USDT","");
-
-   const change=Number(c.priceChangePercent);
-
-   const cls=change>=0?"green":"red";
-
-   return `
-
-   <tr>
-
-    <td>
-
-     <span class="coin">${base}</span><br>
-
-     <span class="symbol">${names[base]||base}</span>
-
-    </td>
-
-    <td class="price">${formatPrice(c.lastPrice)}</td>
-
-    <td class="${cls}" dir="ltr">${change>=0?"+":""}${change.toFixed(2)}%</td>
-
-    <td dir="ltr">${formatVolume(c.quoteVolume)}</td>
-
-   </tr>`;
-
-  }).join("");
-
-  ["BTC","ETH","SOL"].forEach(coin=>{
-
-   const item=map[coin+"USDT"];
-
-   if(item){
-
-    document.getElementById(coin.toLowerCase()).textContent=
-
-    "$"+formatPrice(item.lastPrice);
-
-   }
-
-  });
-
-  document.getElementById("market-status").textContent="متصل";
-
-  document.getElementById("market-status").className="green";
-
-  document.getElementById("updated").textContent=
-
-  new Date().toLocaleTimeString("fa-IR");
-
-  status.textContent="● اتصال برقرار است";
-
-  status.style.color="#54d6a0";
-
- }catch(error){
-
-  status.textContent="● خطا در دریافت داده";
-
-  status.style.color="#ff6478";
-
-  document.getElementById("market-status").textContent="قطع اتصال";
-
-  document.getElementById("market").innerHTML=
-
-  '<tr><td colspan="4">دریافت اطلاعات ناموفق بود. دوباره تلاش کنید.</td></tr>';
-
- }
-
+async function analyzeTimeframe(symbol,interval){
+const candles=await getCandles(symbol,interval);
+return analyze(candles.filter(c=>c.closed));
 }
 
-loadMarket();
+async function analyzeCoin(symbol){
+const intervals=["15m","1h","4h","1d"];
+const results={};
 
-setInterval(loadMarket,30000);
+for(const tf of intervals){
+results[tf]=await analyzeTimeframe(symbol,tf);
+}
 
+const selected=$("tf").value;
+const entry=results[selected];
+
+const longHTF=
+(results["1h"].trend==="صعودی"?1:0)+
+(results["4h"].trend==="صعودی"?1:0)+
+(results["1d"].trend==="صعودی"?1:0);
+
+const shortHTF=
+(results["1h"].trend==="نزولی"?1:0)+
+(results["4h"].trend==="نزولی"?1:0)+
+(results["1d"].trend==="نزولی"?1:0);
+
+const longScore=Math.round(
+entry.longScore*.65+(longHTF/3*100)*.35
+);
+
+const shortScore=Math.round(
+entry.shortScore*.65+(shortHTF/3*100)*.35
+);
+
+return{
+symbol,...entry,longScore,shortScore,
+htfLong:longHTF,
+htfShort:shortHTF
+};
+}
+
+function fmt(n){
+return Number(n).toLocaleString("en-US",{
+maximumFractionDigits:8
+});
+}
+
+function createSignal(x,direction){
+const isLong=direction==="LONG";
+const entry=x.price;
+const risk=x.a*1.5;
+
+const sl=isLong?entry-risk:entry+risk;
+const tp1=isLong?entry+risk*1.5:entry-risk*1.5;
+const tp2=isLong?entry+risk*2.5:entry-risk*2.5;
+
+const score=isLong?x.longScore:x.shortScore;
+const tag=score>=75?"تأیید نسبی":
+score>=60?"فرصت اولیه":"رد شده";
+
+return `
+<div class="signal">
+<span class="tag ${isLong?"long":"short"}">${direction} | ${score}/100</span>
+<h3>${x.symbol}</h3>
+<p>وضعیت: ${tag}</p>
+<p>روند 1h: ${x.symbol} | ${x.trend}</p>
+<p>Entry: <b>${fmt(entry)}</b></p>
+<p>Stop Loss: <b class="red">${fmt(sl)}</b></p>
+<p>TP1: <b class="green">${fmt(tp1)}</b></p>
+<p>TP2: <b class="green">${fmt(tp2)}</b></p>
+<p>Risk: ${fmt(risk)} | R/R: 1:1.5 و 1:2.5</p>
+<p>RSI: ${x.r.toFixed(2)} | ATR: ${fmt(x.a)}</p>
+<p>Volume Ratio: ${x.volumeRatio.toFixed(2)}x</p>
+<p>هم‌جهتی تایم‌فریم بالا:
+${isLong?x.htfLong:x.htfShort}/3</p>
+</div>`;
+}
+
+async function runPool(items,limit,fn){
+let index=0;
+const output=new Array(items.length);
+
+async function worker(){
+while(index<items.length){
+const i=index++;
+try{
+output[i]=await fn(items[i]);
+}catch(e){
+output[i]={symbol:items[i],error:e.message};
+}
+}
+}
+await Promise.all(
+Array.from({length:Math.min(limit,items.length)},worker)
+);
+return output;
+}
+
+async function scanMarket(){
+const btn=$("scanBtn");
+btn.disabled=true;
+$("connection").textContent="● در حال تحلیل بازار...";
+$("market").innerHTML=
+'<tr><td colspan="8">دریافت داده و محاسبه...</td></tr>';
+
+try{
+const results=await runPool(SYMBOLS,3,analyzeCoin);
+
+const valid=results.filter(x=>!x.error);
+const errors=results.filter(x=>x.error);
+
+$("scanned").textContent=valid.length;
+$("marketStatus").textContent=
+errors.length?"داده ناقص":"محاسبه شد";
+
+$("btc").textContent=valid.find(x=>x.symbol==="BTCUSDT")
+?"$"+fmt(valid.find(x=>x.symbol==="BTCUSDT").price):"--";
+
+$("eth").textContent=valid.find(x=>x.symbol==="ETHUSDT")
+?"$"+fmt(valid.find(x=>x.symbol==="ETHUSDT").price):"--";
+
+$("market").innerHTML=results.map(x=>{
+if(x.error)return `<tr><td>${x.symbol}</td><td colspan="7">خطا: ${x.error}</td></tr>`;
+
+const score=Math.max(x.longScore,x.shortScore);
+const direction=x.longScore>x.shortScore?"LONG":
+x.shortScore>x.longScore?"SHORT":"NEUTRAL";
+
+return `<tr>
+<td>${x.symbol}</td>
+<td class="price">${fmt(x.price)}</td>
+<td>${x.trend}</td>
+<td>${x.r.toFixed(1)}</td>
+<td>${x.volumeRatio.toFixed(2)}x</td>
+<td class="green">${x.longScore}</td>
+<td class="red">${x.shortScore}</td>
+<td>${score>=60?direction:"NO ENTRY"}</td>
+</tr>`;
+}).join("");
+
+const longs=valid.filter(x=>
+x.longScore>=60&&x.longScore>x.shortScore
+).sort((a,b)=>b.longScore-a.longScore);
+
+const shorts=valid.filter(x=>
+x.shortScore>=60&&x.shortScore>x.longScore
+).sort((a,b)=>b.shortScore-a.shortScore);
+
+$("longSignals").innerHTML=longs.length?
+longs.map(x=>createSignal(x,"LONG")).join(""):
+'<div class="signal">فعلاً ستاپ LONG واجد شرایط پیدا نشد.</div>';
+
+$("shortSignals").innerHTML=shorts.length?
+shorts.map(x=>createSignal(x,"SHORT")).join(""):
+'<div class="signal">فعلاً ستاپ SHORT واجد شرایط پیدا نشد.</div>';
+
+$("updated").textContent=new Date().toLocaleString("fa-IR");
+$("connection").textContent="● تحلیل تکمیل شد";
+$("connection").style.color="#54d6a0";
+
+}catch(e){
+$("connection").textContent="● خطای موتور تحلیل";
+$("marketStatus").textContent="خطا";
+$("market").innerHTML=
+`<tr><td colspan="8">${e.message}</td></tr>`;
+}finally{
+btn.disabled=false;
+}
+}
+
+scanMarket();
 </script>
-
 </body>
-
 </html>
