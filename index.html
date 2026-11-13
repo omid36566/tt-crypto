@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html>
+
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#080d18">
+
+<title>TT CRYPTO | Smart Market Intelligence</title>
+
+<style>
+
+*{box-sizing:border-box}
+
+body{
+
+ margin:0;
+
+ background:#080d18;
+
+ color:#edf2fa;
+
+ font-family:Arial,Tahoma,sans-serif;
+
+}
+
+header{
+
+ padding:22px 18px;
+
+ background:#101a2b;
+
+ border-bottom:1px solid #26334a;
+
+ display:flex;
+
+ justify-content:space-between;
+
+ align-items:center;
+
+}
+
+.logo{font-size:23px;font-weight:bold;color:#54d6a0}
+
+.logo span{color:#fff}
+
+.status{font-size:11px;color:#54d6a0}
+
+.container{padding:18px;max-width:1100px;margin:auto}
+
+h2{font-size:18px;margin:24px 0 14px}
+
+.subtitle{color:#8998ae;font-size:12px;margin-top:7px}
+
+.hero{
+
+ background:linear-gradient(130deg,#142d3c,#15213b);
+
+ border:1px solid #29465a;
+
+ border-radius:15px;
+
+ padding:23px;
+
+}
+
+.hero h1{font-size:25px;margin:0;color:#fff}
+
+.hero p{color:#aab9ca;line-height:2;font-size:13px}
+
+.stats{
+
+ display:grid;
+
+ grid-template-columns:repeat(2,1fr);
+
+ gap:10px;
+
+ margin-top:18px;
+
+}
+
+.stat,.panel{
+
+ background:#111a2a;
+
+ border:1px solid #25334a;
+
+ border-radius:12px;
+
+ padding:15px;
+
+}
+
+.stat small{color:#8e9bb0}
+
+.stat strong{display:block;font-size:19px;margin-top:10px}
+
+.green{color:#42d69a}
+
+.red{color:#ff6478}
+
+.table-wrap{overflow-x:auto}
+
+table{width:100%;border-collapse:collapse;min-width:520px}
+
+th,td{
+
+ padding:14px 10px;
+
+ text-align:right;
+
+ border-bottom:1px solid #253047;
+
+ font-size:13px;
+
+}
+
+th{color:#8c9bb2;font-weight:normal}
+
+.coin{font-weight:bold}
+
+.symbol{color:#8495ad;font-size:11px}
+
+.price{font-weight:bold;direction:ltr;text-align:right}
+
+.signal-grid{
+
+ display:grid;
+
+ grid-template-columns:1fr;
+
+ gap:12px;
+
+}
+
+.signal{
+
+ background:#111a2a;
+
+ border:1px solid #26334a;
+
+ border-radius:12px;
+
+ padding:16px;
+
+}
+
+.signal h3{margin:0 0 12px;font-size:15px}
+
+.signal p{font-size:12px;color:#9aa9be;line-height:1.9}
+
+.tag{
+
+ display:inline-block;
+
+ padding:5px 10px;
+
+ border-radius:20px;
+
+ font-size:11px;
+
+ margin-bottom:10px;
+
+}
+
+.watch{background:#29364d;color:#c2d5ed}
+
+.long{background:#123e32;color:#55e4ad}
+
+.short{background:#45232e;color:#ff8293}
+
+.note{
+
+ color:#94a4ba;
+
+ font-size:11px;
+
+ line-height:2;
+
+ background:#111a2a;
+
+ border-radius:10px;
+
+ padding:14px;
+
+ margin-top:18px;
+
+}
+
+footer{
+
+ text-align:center;
+
+ color:#718098;
+
+ padding:28px 10px;
+
+ font-size:11px;
+
+}
+
+.refresh{
+
+ background:#1b9b72;
+
+ color:white;
+
+ border:0;
+
+ padding:10px 15px;
+
+ border-radius:8px;
+
+ cursor:pointer;
+
+ font-weight:bold;
+
+}
+
+.refresh:active{opacity:.7}
+
+@media(min-width:700px){
+
+ .stats{grid-template-columns:repeat(4,1fr)}
+
+ .signal-grid{grid-template-columns:repeat(3,1fr)}
+
+ .container{padding:28px}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+ <div class="logo">TT <span>CRYPTO</span></div>
+
+ <div class="status" id="connection">● در حال اتصال...</div>
+
+</header>
+
+<main class="container">
+
+<section class="hero">
+
+ <h1>هوش مصنوعی بازار کریپتو</h1>
+
+ <p>
+
+ پایگاه تحلیل بازار، شناسایی فرصت‌های معاملاتی،
+
+ بررسی جریان نقدینگی و ساختار بازار.
+
+ </p>
+
+ <button class="refresh" onclick="loadMarket()">به‌روزرسانی بازار ↻</button>
+
+</section>
+
+<h2>نمای کلی بازار</h2>
+
+<section class="stats">
+
+ <div class="stat">
+
+  <small>BTC / USDT</small>
+
+  <strong id="btc">--</strong>
+
+ </div>
+
+ <div class="stat">
+
+  <small>ETH / USDT</small>
+
+  <strong id="eth">--</strong>
+
+ </div>
+
+ <div class="stat">
+
+  <small>SOL / USDT</small>
+
+  <strong id="sol">--</strong>
+
+ </div>
+
+ <div class="stat">
+
+  <small>وضعیت داده‌ها</small>
+
+  <strong id="market-status" style="font-size:15px">در انتظار</strong>
+
+ </div>
+
+</section>
+
+<h2>قیمت و عملکرد ارزها</h2>
+
+<div class="panel table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ارز</th>
+
+<th>قیمت (USDT)</th>
+
+<th>تغییر ۲۴h</th>
+
+<th>حجم ۲۴h</th>
+
+</tr>
+
+</thead>
+
+<tbody id="market">
+
+<tr><td colspan="4">در حال دریافت اطلاعات بازار...</td></tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<h2>شکار فرصت‌های معاملاتی</h2>
+
+<div class="signal-grid">
+
+<div class="signal">
+
+ <span class="tag watch">در انتظار تحلیل</span>
+
+ <h3>LONG Scanner</h3>
+
+ <p>شناسایی حمایت‌ها، جمع‌آوری نقدینگی، تغییر ساختار و فرصت‌های ورود خرید.</p>
+
+</div>
+
+<div class="signal">
+
+ <span class="tag watch">در انتظار تحلیل</span>
+
+ <h3>SHORT Scanner</h3>
+
+ <p>شناسایی مقاومت‌ها، ضعف خریداران، شکست حمایت و فرصت‌های ورود فروش.</p>
+
+</div>
+
+<div class="signal">
+
+ <span class="tag watch">در انتظار تحلیل</span>
+
+ <h3>Smart Money</h3>
+
+ <p>بررسی نقدینگی، حجم، ساختار بازار، شکست‌ها و رفتار بازیگران بزرگ.</p>
+
+</div>
+
+</div>
+
+<div class="note">
+
+ <strong>منبع اطلاعات قیمت:</strong> Binance Spot API<br>
+
+ زمان آخرین به‌روزرسانی: <span id="updated">--</span><br>
+
+ اطلاعات این نسخه صرفاً داده‌های بازار است. بخش اسکن سیگنال هنوز به موتور تحلیل متصل نشده است.
+
+</div>
+
+</main>
+
+<footer>
+
+TT CRYPTO © 2026 | SMART MARKET INTELLIGENCE
+
+</footer>
+
+<script>
+
+const symbols = [
+
+"BTCUSDT","ETHUSDT","BNBUSDT","SOLUSDT",
+
+"XRPUSDT","DOGEUSDT","LINKUSDT","SUIUSDT",
+
+"AVAXUSDT","ADAUSDT","ZECUSDT","NEARUSDT"
+
+];
+
+const names = {
+
+BTC:"Bitcoin",ETH:"Ethereum",BNB:"BNB",
+
+SOL:"Solana",XRP:"XRP",DOGE:"Dogecoin",
+
+LINK:"Chainlink",SUI:"Sui",AVAX:"Avalanche",
+
+ADA:"Cardano",ZEC:"Zcash",NEAR:"NEAR"
+
+};
+
+function formatPrice(n){
+
+ return Number(n).toLocaleString("en-US",{
+
+ maximumFractionDigits:8
+
+ });
+
+}
+
+function formatVolume(n){
+
+ return Number(n).toLocaleString("en-US",{
+
+ notation:"compact",maximumFractionDigits:2
+
+ });
+
+}
+
+async function loadMarket(){
+
+ const status=document.getElementById("connection");
+
+ status.textContent="● دریافت اطلاعات...";
+
+ try{
+
+  const url="https://api.binance.com/api/v3/ticker/24hr?symbols="+
+
+  encodeURIComponent(JSON.stringify(symbols));
+
+  const response=await fetch(url);
+
+  if(!response.ok) throw new Error("API error");
+
+  const data=await response.json();
+
+  if(!Array.isArray(data)) throw new Error("Invalid data");
+
+  const map={};
+
+  data.forEach(item=>map[item.symbol]=item);
+
+  document.getElementById("market").innerHTML=
+
+  symbols.map(symbol=>{
+
+   const c=map[symbol];
+
+   if(!c)return "";
+
+   const base=symbol.replace("USDT","");
+
+   const change=Number(c.priceChangePercent);
+
+   const cls=change>=0?"green":"red";
+
+   return `
+
+   <tr>
+
+    <td>
+
+     <span class="coin">${base}</span><br>
+
+     <span class="symbol">${names[base]||base}</span>
+
+    </td>
+
+    <td class="price">${formatPrice(c.lastPrice)}</td>
+
+    <td class="${cls}" dir="ltr">${change>=0?"+":""}${change.toFixed(2)}%</td>
+
+    <td dir="ltr">${formatVolume(c.quoteVolume)}</td>
+
+   </tr>`;
+
+  }).join("");
+
+  ["BTC","ETH","SOL"].forEach(coin=>{
+
+   const item=map[coin+"USDT"];
+
+   if(item){
+
+    document.getElementById(coin.toLowerCase()).textContent=
+
+    "$"+formatPrice(item.lastPrice);
+
+   }
+
+  });
+
+  document.getElementById("market-status").textContent="متصل";
+
+  document.getElementById("market-status").className="green";
+
+  document.getElementById("updated").textContent=
+
+  new Date().toLocaleTimeString("fa-IR");
+
+  status.textContent="● اتصال برقرار است";
+
+  status.style.color="#54d6a0";
+
+ }catch(error){
+
+  status.textContent="● خطا در دریافت داده";
+
+  status.style.color="#ff6478";
+
+  document.getElementById("market-status").textContent="قطع اتصال";
+
+  document.getElementById("market").innerHTML=
+
+  '<tr><td colspan="4">دریافت اطلاعات ناموفق بود. دوباره تلاش کنید.</td></tr>';
+
+ }
+
+}
+
+loadMarket();
+
+setInterval(loadMarket,30000);
+
+</script>
+
+</body>
+
+</html>
